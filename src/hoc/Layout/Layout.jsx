@@ -12,7 +12,7 @@ export default class Layout extends Component {
   toggleMenuHandler = () => {
     this.setState({ menu: !this.state.menu })
   }
-  
+
   closeMenu = () => {
     this.setState({ menu: false })
   }

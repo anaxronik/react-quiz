@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
+
 import axiosQuiz from '../../axios/axios-quiz'
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz'
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz'
@@ -6,7 +8,7 @@ import Loader from '../../components/ui/Loader/Loader'
 
 import './Quiz.css'
 
-export default class Quiz extends Component {
+class Quiz extends Component {
   state = {
     results: {},
     isFinished: false,
@@ -71,10 +73,12 @@ export default class Quiz extends Component {
   }
 
   async componentDidMount() {
-    // axiosQuiz
     try {
-      const response = await axiosQuiz.get('/quizes.json')
-      console.log(response)
+      const quizId = this.props.match.params.id
+      console.log(quizId)
+      const response = await axiosQuiz.get(`/quizes/${quizId}.json`)
+      let quiz = response.data
+      this.setState({ quiz, loading: false })
     } catch (err) {
       console.log(err)
     }
@@ -108,3 +112,5 @@ export default class Quiz extends Component {
     )
   }
 }
+
+export default withRouter(Quiz)

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import is from 'is_js'
+import axios from 'axios'
 
 import Button from '../../components/ui/Button/Button'
 import Input from '../../components/ui/Input/Input'
@@ -36,8 +37,43 @@ export default class Auth extends Component {
       },
     },
   }
-  loginHandler = () => {}
-  registerHandler = () => {}
+  loginHandler = async (event) => {
+    event.preventDefault()
+    const apiKey = 'AIzaSyCMNF5DxR8YhiUGHTj3JmZ38-X6DOTGg4A'
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    }
+    try {
+      const response = await axios.post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`,
+        authData
+      )
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  registerHandler = async (event) => {
+    event.preventDefault()
+    const apiKey = 'AIzaSyCMNF5DxR8YhiUGHTj3JmZ38-X6DOTGg4A'
+    const authData = {
+      email: this.state.formControls.email.value,
+      password: this.state.formControls.password.value,
+      returnSecureToken: true,
+    }
+    try {
+      const response = await axios.post(
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`,
+        authData
+      )
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   submitHandler = () => {}
 
   validateControl = (value, validation) => {
