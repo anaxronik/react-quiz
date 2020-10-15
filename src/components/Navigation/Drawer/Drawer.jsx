@@ -4,18 +4,20 @@ import Backdrop from '../../ui/Backdrop/Backdrop'
 
 import classes from './Drawer.module.css'
 
-const links = [
-  { to: '/', label: 'Список', exact: true },
-  { to: '/auth', label: 'Авторизация', exact: false },
-  { to: '/quiz-creator', label: 'Создать', exact: false },
-]
-
 export default class Drawer extends Component {
   render() {
     if (!this.props.isOpen) {
       return null
     }
 
+    let links = [{ to: '/', label: 'Список', exact: true }]
+
+    if (this.props.isAuthenticated) {
+      links.push({ to: '/quiz-creator', label: 'Создать', exact: false })
+      links.push({ to: '/logout', label: 'Выйти', exact: false })
+    } else {
+      links.push({ to: '/auth', label: 'Авторизация', exact: false })
+    }
     return (
       <React.Fragment>
         <Backdrop onClick={this.props.onClose} />

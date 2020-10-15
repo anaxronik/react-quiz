@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axiosQuiz from '../../axios/axios-quiz'
 
 import Button from '../../components/ui/Button/Button'
 import Input from '../../components/ui/Input/Input'
